@@ -15,14 +15,34 @@ const Statistics = ({datGood, datNeutral, datBad}) => {
    return(
     <div>
     <h1>statistics</h1>
-    <ul>
-    <p>good {datGood}</p>
-    <p>neutral {datNeutral}</p>
-    <p>bad {datBad}</p>
-    <p>all {datGood + datNeutral + datBad}</p>
-    <p>average {(datGood - datBad)/(datGood + datNeutral + datBad)}</p>
-    <p>positive {100*(datGood / (datGood + datNeutral + datBad))}%</p>
-    </ul>
+    <table>
+      <tbody>
+        <tr>
+        <td>good</td>
+          <td>{datGood}</td>
+        </tr>
+        <tr>
+        <td>neutral</td>
+          <td>{datNeutral}</td>
+        </tr>
+        <tr>
+        <td>bad</td>
+          <td>{datBad}</td>
+        </tr>
+        <tr>
+          <td>all</td>
+          <td>{datGood + datNeutral + datBad}</td>
+        </tr>
+        <tr>
+          <td>average</td>
+          <td>{(datGood - datBad)/(datGood + datNeutral + datBad)}</td>
+        </tr>
+        <tr>
+          <td>positive</td>
+          <td>{100*(datGood / (datGood + datNeutral + datBad))}%</td>
+        </tr>
+      </tbody>
+    </table>
     </div>
   )
 }
