@@ -3,6 +3,30 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+const Statistics = ({datGood, datNeutral, datBad}) => {
+  if (datGood + datNeutral + datBad === 0) {
+    return (
+      <div>
+        <br></br>
+        ¡¡No comments yet!!
+      </div>
+    )
+  }
+   return(
+    <div>
+    <h1>statistics</h1>
+    <ul>
+    <p>good {datGood}</p>
+    <p>neutral {datNeutral}</p>
+    <p>bad {datBad}</p>
+    <p>all {datGood + datNeutral + datBad}</p>
+    <p>average {(datGood - datBad)/(datGood + datNeutral + datBad)}</p>
+    <p>positive {100*(datGood / (datGood + datNeutral + datBad))}%</p>
+    </ul>
+    </div>
+  )
+}
+
 
 
 
@@ -30,15 +54,11 @@ const App = () => {
         bad
       </button>
 
-      <h1>statistics</h1>
-      <ul>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {good + neutral + bad}</p>
-      <p>average {(good - bad)/(good + neutral + bad)}</p>
-      <p>positive {100*(good / (good + neutral + bad))}%</p>
-      </ul>
+      <Statistics 
+        datGood = {good}
+        datNeutral = {neutral}
+        datBad = {bad} />
+
     </div>
   )
 }
