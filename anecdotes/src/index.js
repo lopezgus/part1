@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom/client";
 import './index.css';
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -47,8 +47,10 @@ const anecdotes = [
   'The only way to go fast, is to go well.'
 ]
 
-ReactDOM.render(
-  <App anecdotes={anecdotes} />,
-  document.getElementById('root')
-)
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <App anecdotes={anecdotes} />
+  </React.StrictMode>
+);
 
