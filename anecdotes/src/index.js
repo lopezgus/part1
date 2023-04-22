@@ -1,37 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import ReactDOM from "react-dom/client";
 import './index.css';
 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const Boton = ({text, conClick}) => {
+// Button component
+const Boton = ({text, click}) => <button onClick={click}> {text} </button>;
 
-  return(
-    <div>
-      <button onClick={conClick}>
-        {text}
-      </button>
-    </div>
-  )
-}
-
-const App = (props) => {
-
-  const click = () => {
-    (setSelected(random(anecdotes.length-1)));
+const App = ({anecdotes}) => {
+  
+  const random = () => {
+    return Math.floor((Math.random() * Math.floor(anecdotes.length)));
   }
-  const random = (max) => {
-    return Math.floor((Math.random() * (max - 0 + 1)) + 0);
-  }
-  const [selected, setSelected] = useState(0)
+  const [selected, setSelected] = useState(random());
 
-  return (
+  const ArrayInic = (valor, long) => {
+    let arr=[],i=0;
+    while (i<long) arr[i++]= valor;
+    return arr;
+  }
+  // State initialized wiht an array with 0 
+  const [votos, setVotos] = useState(ArrayInic (0, anecdotes.length));
+
+  // look for max # of votes in the array
+  const maxVotos = Math.max(...votos);
+
+  //return index to highest voted
+  const anecdotaMasVotada = anecdotes[votos.indexOf(maxVotos)];
+
+  const nextAnecdote = () => (setSelected(random()));
+
+  const voto = () => {
+    const copiaVotos = [...votos];
+    copiaVotos[selected] +=1;
+    setVotos (copiaVotos);
+    }
+    
+   return (
     <div>
-      {props.anecdotes[selected]}
-      <Boton 
-      text="Next anecdote"
-      conClick= {click} 
-      /> 
+      <h1>Anecdote of the day</h1>
+      <p>{anecdotes[selected]}</p>
+      <p>has {votos[selected]} votes</p>
+      <Boton text="vote" click= {voto} /> 
+      <Boton text="Next anecdote" click= {nextAnecdote} /> 
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotaMasVotada}</p>
+      <p>has {maxVotos} votes</p>
     </div>    
   )
 }
